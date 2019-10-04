@@ -20,9 +20,6 @@ vagrant init hashicorp/precise32
     vb.cpus = 1
   end 
 ```
-```
-  config.vm.network :forwarded_port, guest: 8088, host: 8088
-```
 
 4. Start the project
 ```bash
