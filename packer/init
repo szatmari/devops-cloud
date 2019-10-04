@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# Image init script
+#
+
+cd /devops
+
+java -jar app.jar >> /devops/app.log

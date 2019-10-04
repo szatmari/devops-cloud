@@ -1,0 +1,73 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": ""
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "us-east-1",
+    "source_ami": "ami-04763b3055de4860b",
+    "instance_type": "t3.medium",
+    "ssh_username": "ubuntu",
+    "ami_name": "DevOps PackerDemo {{timestamp}}",
+    "subnet_id": "subnet-b0a2a3c4",
+    "security_group_id": "sg-401df631",
+    "associate_public_ip_address": "true",
+    "tags": {
+        "Cost Center": "devops"
+    },
+    "launch_block_device_mappings": [
+      {
+        "device_name": "/dev/sda1",
+        "volume_size": 40,
+        "volume_type": "gp2",
+        "delete_on_termination": true
+      }
+    ]
+  }],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo apt-get update",
+        "sudo apt -y install maven gradle git nano vim mc openjdk-8-jdk-headless curl wget gem ruby ruby-dev apt-transport-https ca-certificates curl gnupg-agent software-properties-common",
+        "sudo update-java-alternatives -s java-1.8.0-openjdk-amd64",
+        "sudo mkdir /devops",
+        "sudo chmod 777 /devops"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "build/libs/gs-rest-service-0.1.0.jar",
+      "destination": "/devops/app.jar"
+    },
+    {
+      "type": "file",
+      "source": "packer/init",
+      "destination": "/devops/init"
+    },
+    {
+      "type": "file",
+      "source": "packer/devops-init.service",
+      "destination": "/devops/devops-init.service"
+    },
+    {
+      "type": "shell",
+      "inline": [
+      	"sudo chmod +x /devops/init",
+      	"sudo mv /devops/devops-init.service /etc/systemd/system/devops-init.service",
+      	"sudo systemctl daemon-reload",
+      	"sudo systemctl enable devops-init"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+      	"sudo find / -name 'authorized_keys' -exec rm -f {} \\;",
+      	"sudo find / -name '.bash_history' -exec rm -f {} \\;"
+      ]
+    }
+  ]
+}

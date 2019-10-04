@@ -1,0 +1,12 @@
+[Unit]
+Description=DevOps Init
+
+[Service]
+Type=oneshot
+Environment=HOME=/devops
+WorkingDirectory=/devops
+ExecStart=/devops/init
+
+[Install]
+WantedBy=multi-user.target
+
