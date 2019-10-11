@@ -50,4 +50,9 @@ docker-compose up
 
 ## Kubernetes
 
-
+1. Test basic commands
+```bash
+microk8s.kubectl get nodes -o wide
+microk8s.kubectl get all
+microk8s.kubectl apply -f kubernetes.yml
+```
