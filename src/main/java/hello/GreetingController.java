@@ -20,7 +20,7 @@ public class GreetingController {
 
     private static final String USER = "root";
     private static final String PASSWORD = "devops";
-    private static final String HOSTNAME = "172.17.0.2"; // TODO set this hostname
+    private static final String HOSTNAME = System.getenv().get("DBHOST");
     private static final int PORT = 3306;
 
     @RequestMapping("/greeting")

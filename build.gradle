@@ -26,7 +26,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.41'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
     compile("org.springframework.boot:spring-boot-starter-web")
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('com.jayway.jsonpath:json-path')
