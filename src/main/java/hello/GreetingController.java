@@ -33,7 +33,7 @@ public class GreetingController {
     public ArrayList<String> sql()
     {
         final String url = String.format(
-            "jdbc:mysql://%s:%d/golf?useSSL=false",
+            "jdbc:mysql://%s:%d/golf?allowPublicKeyRetrieval=true&useSSL=false",
             HOSTNAME,
             PORT
         );
