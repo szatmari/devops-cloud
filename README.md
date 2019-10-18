@@ -2,6 +2,7 @@
 
 ## Preparation
 1. Fork the repo
+2. Start a VM based on the "DevOps - Cloud" template
 
 ### Docker HUB
 1. Register/login to the Docker Hub. Generate your access token
@@ -22,8 +23,9 @@ docker push szatmarizoltanmit/helloworld:latest
 
 ## Kubernetes
 1. Clone the repository to the cloud VM
-2. Create the /home/cloud/db-init directory
+2. Enable the MicroK8S Ingress module and create the /home/cloud/db-init directory
 ```bash
+microk8s.enable ingress dns
 mkdir /home/cloud/db-init
 ```
 3. Create kubernetes volume
