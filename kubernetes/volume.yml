@@ -1,0 +1,30 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: db-init-pv-volume
+  labels:
+    type: local
+    app: web
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Mi
+  accessModes:
+    - ReadOnlyMany
+  hostPath:
+    path: "/home/cloud/db-init"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: db-init-pv-claim
+  labels:
+    app: web
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 1Mi
+

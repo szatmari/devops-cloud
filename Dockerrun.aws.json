@@ -1,0 +1,13 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "szatmarizoltanmit/helloworld:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "8088"
+    }
+  ],
+  "Logging": "/var/log/nginx"
+}
