@@ -1,13 +1,13 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
- name: ingress-pod
+ name: hw
 spec:
  rules:
    - http:
        paths:
          - path: /
            backend:
-             serviceName: helloservice
+             serviceName: httpservice
              servicePort: 8088
 

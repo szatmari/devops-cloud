@@ -1,0 +1,38 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: dbservice
+spec:
+  selector:
+    app: dbapp
+  type: NodePort
+  ports:
+  - port: 3306
+    targetPort: mysql
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: dbapp
+  labels:
+    app: dbapp
+spec:
+  containers:
+  - name: mysql-db
+    image: mysql
+    ports:
+    - name: mysql
+      containerPort: 3306
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: devops
+    - name: MYSQL_DATABASE
+      value: golf
+    volumeMounts:
+      - mountPath: /docker-entrypoint-initdb.d
+        name: mysql-initdb
+  volumes:
+    - name: mysql-initdb
+      persistentVolumeClaim:
+        claimName: db-init-pv-claim
+

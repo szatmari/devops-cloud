@@ -23,3 +23,7 @@ spec:
     ports:
     - name: http
       containerPort: 8088
+    env:
+    - name: DBHOST
+      value: TODO.DB.IP
+
