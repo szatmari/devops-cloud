@@ -38,7 +38,7 @@ microk8s.kubectl get pv,pvc
 microk8s.kubectl apply -f db.yml
 microk8s.kubectl logs -f pod/dbapp
 ```
-5. Test the database connection
+5. Test the database connection then run the database/golf.sql
 ```bash
 microk8s.kubectl get all
 mysql -u root -p -h dbservice.ip.address golf
