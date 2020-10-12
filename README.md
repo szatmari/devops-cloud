@@ -38,10 +38,12 @@ microk8s.kubectl get pv,pvc
 microk8s.kubectl apply -f db.yml
 microk8s.kubectl logs -f pod/dbapp
 ```
-5. Test the database connection
+5. Init and test the database connection
 ```bash
 microk8s.kubectl get all
-mysql -u root -p -h dbservice.ip.address golf
+echo "show tables;" | mysql -u root -p -h dbservice.ip.address golf
+mysql -u root -p -h dbservice.ip.address gold < database/golf.sql
+echo "show tables;" | mysql -u root -p -h dbservice.ip.address golf
 ```
 6. Fine-tune the ```DBHOST``` environment variable with the IP of the dbservvice and deploy your web application
 ```bash
