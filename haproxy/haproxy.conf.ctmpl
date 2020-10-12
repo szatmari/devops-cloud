@@ -1,0 +1,22 @@
+global
+    daemon
+    user nobody
+    group nogroup
+    maxconn 4096
+
+defaults
+    mode http
+    timeout client 10s
+    timeout connect 10s
+    timeout server 10s
+
+listen http-in
+    bind *:9999
+    stats enable
+    stats auth admin:devops
+    stats uri /haproxy
+    balance roundrobin
+    option httpchk HEAD /pi/3 HTTP/1.0
+
+    {{range service "pi"}}
+    server {{.Node}} {{.Address}}:{{.Port}} check inter 10s fastinter 1s rise 2 fall 2 weight 8{{end}}
